@@ -151,7 +151,7 @@ class Simulator(object):
             else:
                 print "| Training trial {}".format(trial)
 
-            print "\-------------------------"
+            print("\-------------------------")
             print 
 
             self.env.reset(testing)
