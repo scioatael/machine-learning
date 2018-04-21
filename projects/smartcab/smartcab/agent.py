@@ -130,14 +130,17 @@ class LearningAgent(Agent):
             action = random.choice(self.valid_actions)
             print("Action from epsilon=", action)
         else:
-        # Otherwise, choose an action with the highest Q-value for the current state
+        # Otherwise, choose an action with the highest Q-value for th   e current state
             max_Q = self.get_maxQ(self.state)
+            max_action_list = []
             print("Q from get_maxQ=", max_Q, "corresponsing action=",   )
             # Be sure that when choosing an action with highest Q-value that you randomly select between actions that "tie".
             for q_item in self.Q[state]:
                 if self.Q[state][q_item] == max_Q:
-                    action = q_item
-                    print("max action found= ", action)
+                    max_action_list.append(q_item) # a list of all actions with max value
+                    print("max action found ", q_item,"with max_Q:", max_Q )
+            action = random.choice(max_action_list) # select randomly an action
+            print ("randomly selected action:", action)
         return action
 
 
@@ -209,7 +212,7 @@ def run():
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
     #sim = Simulator(env,update_delay=0.1)
-    sim = Simulator(env, update_delay=0.01, log_metrics=True, display=False, optimized=True)
+    sim = Simulator(env, update_delay=0.00001, log_metrics=True, display=False, optimized=True)
     
     ##############
     # Run the simulator

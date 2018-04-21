@@ -12246,8 +12246,9 @@ waypoint - 3 options</p>
 <li>the decaying function is depicted by the linear relationship between exploration factor and number of trials. 
 Learning factor (alpha) remains fixed during the whole experiment</li>
 <li>as the number of training trials increasse, the number of bad actions is reduced, but still on high level. 
-Q-learning agent is approximately 2 times more safe and reliable, but it still needs optimisation before it would have been considered safe and reliable for real world application</li>
+Q-learning agent is approximately 2 times more safe and reliable, but it still needs optimisation before it would have been considered safe and reliable for real world application.</li>
 </ol>
+<p>In addition, assuming a linear trendline for a function in a top right diagram we can assume though that the average rewards per action will turn to the positive trend after 10 more trials, i.e. in average after 30 trials.</p>
 
 </div>
 </div>
@@ -12390,12 +12391,13 @@ In the end I decided to use:</p>
 <li>I used the inverse exponential function $$epsilon = e^{-at}, \textrm{for }$$ 
 where a=0.001 and the tolerance is 0.000045. </li>
 <li>The above setting of exploratio factor yielded around 10000 test trials. </li>
-<li>I used the above settings our epsilon-tolerance to yield a sufficient amount of test trials to ensure that the agent have sufficient examples of rewards for each state in the state space of 96 different states.</li>
+<li>I used the above settings our epsilon-tolerance to yield a sufficient amount of training trials to ensure that the agent have sufficient examples of rewards for each state in the state space of 96 different states.</li>
 <li>modification of learning rate did not yield significant changes in the results, so I remained with moderate rate of 0.5</li>
 <li>Overall combination of optmisation parameters enables to acheive significant improvement compared to first Q-Learner. </li>
 <li>The agent have reached very low error ration already after 6000 trials, achieving A+ safety and A reliability ranking. The high reliability was reached already after ca. 2000 trials. </li>
-<li>The above level of reliability and safety gives a good confidence that the system can operate in this simplified environement successfuly and </li>
+<li>The above level of reliability and safety gives a good confidence that the system can operate in this simplified environement successfuly.</li>
 </ul>
+<p>-UPDATE (based on #1 review): with this amount of training trials, I could have considered the "right" as well in a state space (which would triples the total amount of state) to verify that the agent actually learns that this feature is irrelevant for its goal of maintaing safety and reliability of getting to the destination.</p>
 
 </div>
 </div>
@@ -12443,7 +12445,7 @@ oncoming indicated the direction of card coming from the opposite direction - le
 <ol>
 <li></li>
 <li>cab shall follow the closest route to the endpoint: if endpoint is on the left, cab shall turn left, it on the right, turn right, if straigh ahead - then go forward, if the endpoint is behind - take left of right depending on other conditions of the traffic</li>
-<li>cab can turn left on green, but provided there are no cars from oncoming direction driving forward</li>
+<li>cab can turn left on green, provided that the car from oncoming direction turns left. </li>
 <li>cab can drive on red in the right direction, provided there is no other car driving from the left heading straight ahead</li>
 <li>other than the above the cab should stop on the red light</li>
 <li>&amp; 3 &amp; 4. In most of the cases the agent has learned the optimal policy where the reward for the action according to policy rules is the highest positive value whereas incidents give stong negative rewards. 
@@ -12562,6 +12564,7 @@ A few examples of good policy: </li>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> It may not be beneficial to take into account a discount factor and future rewards in our specific setup, because of the fact that the cab is incentifized to move towards the goal, but the goal relative coordinates  are not defined. With this regards the agent cannot built any assumptions about the best possible future steps as the future rewards does not depend on the future steps. Agent only learns what is the correct waypoint in the next step, but cannot "build up" the optimal route upfront since the destination and its relative positions are unknown.</p>
+<p>Secondly, the environments is also not deterministic in its nature since the destination is randomly choosen in each trial. Therefore here similarly, there are no means to incentivize the fact that the  agent will reach a destination in the future (future rewards) as they do not have any relationship (are independent) on the rewards of reaching the current destination.</p>
 
 </div>
 </div>
